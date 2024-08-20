@@ -30,5 +30,5 @@ type LessFields struct {
 }
 
 func TestEquals(t *testing.T) {
-
+	t.Fatalf("bad stuff")
 }
