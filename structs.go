@@ -3,13 +3,15 @@ package structs
 import "reflect"
 
 func Equals(s1 interface{}, s2 interface{}) bool {
-	rv := reflect.ValueOf(s1)
+	r1 := reflect.ValueOf(s1)
+	r2 := reflect.ValueOf(s2)
 
-	for i := 0; i < rv.NumField(); i++ {
-		rvf := rv.Field(i)
-		rfv := reflect.ValueOf(s2).Field(i)
+	if r1.NumField() != r2.NumField() {
+		return false
+	}
 
-		if rvf.Interface() != rfv.Interface() {
+	for i := 0; i < r1.NumField(); i++ {
+		if r1.Field(i).Interface() != r2.Field(i).Interface() {
 			return false
 		}
 	}

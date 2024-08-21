@@ -30,5 +30,65 @@ type LessFields struct {
 }
 
 func TestEquals(t *testing.T) {
-	t.Fatalf("bad stuff")
+	testStruct := Original{
+		Field1: 1,
+		Field2: "2",
+	}
+	expected := true
+	actual := Equals(testStruct, testStruct)
+
+	if expected != actual {
+		t.Fatalf("\nExpected:\t%v\nActual:\t\t%v\n", expected, actual)
+	}
+}
+
+func TestNotEqualsDifferentTypes(t *testing.T) {
+	originalStruct := Original{
+		Field1: 1,
+		Field2: "2",
+	}
+	differentFieldNamesStruct := DifferentFieldNames{
+		Field3: 3,
+		Field4: "4",
+	}
+	expected := false
+	actual := Equals(originalStruct, differentFieldNamesStruct)
+
+	if expected != actual {
+		t.Fatalf("\nExpected:\t%v\nActual:\t\t%v\n", expected, actual)
+	}
+}
+
+func TestNotEqualsMoreFields(t *testing.T) {
+	originalStruct := Original{
+		Field1: 1,
+		Field2: "2",
+	}
+	moreFieldssStruct := MoreFields{
+		Field1: 1,
+		Field2: "2",
+		Field3: "3",
+	}
+	expected := false
+	actual := Equals(originalStruct, moreFieldssStruct)
+
+	if expected != actual {
+		t.Fatalf("\nExpected:\t%v\nActual:\t\t%v\n", expected, actual)
+	}
+}
+
+func TestNotEqualsLessFields(t *testing.T) {
+	originalStruct := Original{
+		Field1: 1,
+		Field2: "2",
+	}
+	lessFieldsStruct := LessFields{
+		Field1: 1,
+	}
+	expected := false
+	actual := Equals(originalStruct, lessFieldsStruct)
+
+	if expected != actual {
+		t.Fatalf("\nExpected:\t%v\nActual:\t\t%v\n", expected, actual)
+	}
 }
