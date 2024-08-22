@@ -47,9 +47,26 @@ func TestNotEqualsDifferentTypes(t *testing.T) {
 		Field1: 1,
 		Field2: "2",
 	}
+	differentFieldTypesStruct := DifferentFieldTypes{
+		Field1: "1",
+		Field2: 2,
+	}
+	expected := false
+	actual := Equals(originalStruct, differentFieldTypesStruct)
+
+	if expected != actual {
+		t.Fatalf("\nExpected:\t%v\nActual:\t\t%v\n", expected, actual)
+	}
+}
+
+func TestNotEqualsDifferentNames(t *testing.T) {
+	originalStruct := Original{
+		Field1: 1,
+		Field2: "2",
+	}
 	differentFieldNamesStruct := DifferentFieldNames{
-		Field3: 3,
-		Field4: "4",
+		Field3: 1,
+		Field4: "2",
 	}
 	expected := false
 	actual := Equals(originalStruct, differentFieldNamesStruct)
